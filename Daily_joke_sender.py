@@ -39,19 +39,53 @@ def send_email(joke, recipient_emails):
     
     html_template = """
     <html>
-        <head></head>
-        <body>
-            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #e9e9e9; padding: 20px;">
-                <h2 style="color: #4a90e2;">Arefin's Daily Joke</h2>
-                <p>Hey mate,</p>
-                <p>This email serves as a token of appreciation I have for you. Here's your daily joke:</p>
-                <p style="font-size: 18px; font-weight: bold; padding: 10px; background-color: #f9f9f9; border: 1px solid #e9e9e9;">{{joke}}</p>
-                <p>Hope that brought a smile to your face! Stay tuned for more jokes tomorrow.</p>
-                <p>Best,</p>
-                <p>Arefin</p>
-            </div>
-        </body>
-    </html>
+    <head>
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                max-width: 600px;
+                background-color: #fff;
+                margin: 40px auto;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                padding: 20px;
+            }
+            .title {
+                color: #4a90e2;
+                border-bottom: 2px solid #e9e9e9;
+                padding-bottom: 10px;
+                margin-bottom: 20px;
+            }
+            .joke-content {
+                background-color: #f9f9f9;
+                border: 1px solid #e9e9e9;
+                padding: 15px;
+                font-size: 18px;
+                font-weight: bold;
+                margin: 20px 0;
+            }
+            .footer {
+                font-style: italic;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2 class="title">Arefin's Daily Joke</h2>
+            <p>Hey mate,</p>
+            <p> This email serves as a token of appreciation I have for you. Here's your daily joke:</p>
+            <div class="joke-content">{{joke}}</div>
+            <p>Hope that brought a smile to your face! Stay tuned for more jokes tomorrow.</p>
+            <p class="footer">Best,<br>Arefin</p>
+        </div>
+    </body>
+</html>
+
     """
     
     html_content = html_template.replace("{{joke}}", joke)
