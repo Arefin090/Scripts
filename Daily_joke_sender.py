@@ -1,6 +1,7 @@
 import smtplib
 import requests
 from email.mime.text import MIMEText
+import keyring
 
 def fetch_joke():
     response = requests.get("https://v2.jokeapi.dev/joke/Any")
@@ -13,7 +14,9 @@ def fetch_joke():
 
 def send_email(joke, recipient_email):
     sender_email = "dailyjokesbyarefin@gmail.com"
-    sender_password = "fjzr omyd hbml wsqb"
+    
+    # Retrieve the stored Gmail App Password from macOS Keychain
+    sender_password = keyring.get_password("daily_joke_sender", "GMAIL_APP_PASSWORD")
     
     subject = "Arefin's Daily Joke"
     body = joke
