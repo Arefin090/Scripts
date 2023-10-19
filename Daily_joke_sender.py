@@ -4,13 +4,21 @@ from email.mime.text import MIMEText
 import keyring
 from email.mime.multipart import MIMEMultipart
 def fetch_joke():
-    response = requests.get("https://v2.jokeapi.dev/joke/Any")
+    url = "https://dad-jokes.p.rapidapi.com/random/joke"
+    headers = {
+        "X-RapidAPI-Key": "2d157e36ebmshb07e9adfee0dcb3p13048cjsnb3eb119c23de",
+        "X-RapidAPI-Host": "dad-jokes.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers)
     data = response.json()
-    
-    if data['type'] == 'single':
-        return data['joke']
-    else:
-        return f"{data['setup']} ... {data['delivery']}"
+
+    # Extracting the joke's setup and punchline
+    setup = data['body'][0]['setup']
+    punchline = data['body'][0]['punchline']
+
+    # Formatting the joke
+    return f"{setup} ... {punchline}"
 
 def send_email(joke, recipient_email):
     sender_email = "dailyjokesbyarefin@gmail.com"
